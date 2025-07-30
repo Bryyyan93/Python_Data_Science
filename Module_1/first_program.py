@@ -14,7 +14,7 @@ print(sep)
 sepp = d[0:3]
 print(sepp)
 
-e = 'clocrkr1e1c1t'
+e = '01234567'
 print(e[::2])
 print("\\")
 
@@ -34,3 +34,9 @@ re = "."
 
 gr = g.replace(",", re)
 print(gr)
+
+name = 'Lizz'
+print(name[0:2])
+
+B=["a","b","c"]
+print(B[1:])
