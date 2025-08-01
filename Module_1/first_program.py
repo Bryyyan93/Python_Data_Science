@@ -38,5 +38,5 @@ print(gr)
 name = 'Lizz'
 print(name[0:2])
 
-B=["a","b","c"]
+B = ["a", "b", "c"]
 print(B[1:])
