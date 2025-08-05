@@ -2,6 +2,8 @@
 import math
 import pandas as pd
 import numpy as np
+import requests as rqs
+
 # ====================
 # MODULE 1 - PYTHON BASICS
 # ====================
@@ -50,14 +52,14 @@ print(set1)
 # Crea un diccionario con tus datos: nombre, edad, y ciudad. Accede a la edad y súmale 1.
 
 datos = {"nombre": "Bryan",
-       "edad": "30",
+       "edad": 30,
        "ciudad": "Valencia"
        }
 
 print(datos["edad"])
-datos["edad"] = 31
+age = datos["edad"] + 1
 
-print(datos["edad"])
+print(age)
 
 
 # ======================================
@@ -109,26 +111,26 @@ dog.imprimir()
 # ✅ Ejercicio 12: Leer archivos
 # Crea un archivo de texto con varias líneas. Ábrelo y muestra su contenido línea por línea
 
-with open("./ejercicio_12.txt", 'r') as file:
+with open("./python/ejercicio_12.txt", 'r') as file:
     for line in file:
         print(line)     
 
 # ✅ Ejercicio 13: Escribir archivos
 # Escribe 3 líneas de texto en un nuevo archivo llamado "salida.txt"
-with open("./salida.txt", 'w') as file:
+with open("./python/salida.txt", 'w') as file:
     lines = ["Mapache\n", "Mapachosa\n", "Mapachillo\n"]
 
     for line in lines:
         file.write(line)
 
-with open("./salida.txt", 'r') as file:
+with open("./python/salida.txt", 'r') as file:
     print("nuevo")
     for lin in file:
         print(lin)    
 
 # ✅ Ejercicio 14: Cargar datos con Pandas
 # Carga un CSV con pandas (usa uno genérico como ejemplo.csv si no tienes uno propio)
-with pd.ExcelFile('./iso.xlsx') as xls:
+with pd.ExcelFile('python/iso.xlsx') as xls:
     df = pd.read_excel(xls)
     print(df.head())
 
@@ -148,17 +150,46 @@ frame.to_csv('datos.csv', index=False)
 
 # ✅ Ejercicio 16: Numpy 1D Arrays
 # Crea un array de numpy con los números del 0 al 9 y calcula su media
-datos = []
+datos = range(0,10)
 arr = np.array(datos)
 print(arr)
+print(arr.mean())
 
 # ✅ Ejercicio 17: Numpy 2D Arrays
 # Crea una matriz 3x3 con valores del 1 al 9 e imprime la diagonal principal
 
+mat = np.arange(1,10).reshape(3, 3)
+print(mat)
+
+diagonal = []
+for i in range(len(mat)):
+    diagonal.append(mat[i][i])
+print(diagonal)    
+
 # ✅ Ejercicio 18: Usar una API simple (ej. chiste aleatorio)
 # Usa el módulo `requests` para llamar a una API pública y mostrar un resultado (por ejemplo: chiste)
 
+r = rqs.get('https://api.chucknorris.io/jokes/random')
+print(r.status_code)
+
+resp = r.json()
+
+#print(resp)
+
+print(resp['value'])
+
 # ✅ Ejercicio 19: Configurar API
 # (Opcional) Escribe una función que reciba una URL y devuelva el JSON de la respuesta
+
+try:
+    r = rqs.get('https://api.chucknorris.io/jokes/random')
+    print(r.status_code)
+    if r.status_code == 200:
+        resp = r.json()
+        print(resp)
+    else:
+        print("Hay un error", r.status_code)    
+except Exception as e:
+    print("error:", e)
 
 # === FIN DE LA PRÁCTICA ===
