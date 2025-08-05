@@ -1,0 +1,5 @@
+perro
+gato
+mapache
+gaviota
+oso
